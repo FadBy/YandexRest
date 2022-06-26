@@ -1,0 +1,13 @@
+version: "3"
+services:
+  my-web-app-db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=sul440
+      - POSTGRES_DATABASE=students
+  my-web-app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - my-web-app-db
