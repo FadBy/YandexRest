@@ -17,6 +17,11 @@ public class ShopUnitImport {
         this.price = price;
     }
 
+    /**
+     * convert this shopUnitImport to shopUnit with this date and without children
+     * @param date this date
+     * @return converted shopUnitImport
+     */
     public ShopUnit convertToShopUnit(String date) {
         HashSet<ShopUnit> children = null;
         if (type == ShopUnitType.CATEGORY) {

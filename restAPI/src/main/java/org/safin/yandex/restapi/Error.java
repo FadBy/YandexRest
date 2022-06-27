@@ -2,6 +2,9 @@ package org.safin.yandex.restapi;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Represents a message for bad request
+ */
 public class Error {
 
     private int code;

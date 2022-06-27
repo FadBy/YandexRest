@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * Represent database entity for storing offers of categories
+ */
 @Entity
 @Table
 public class ShopUnit {
@@ -62,6 +65,9 @@ public class ShopUnit {
         return cost;
     }
 
+    /**
+     * helps keep cost and offersCount not null
+     */
     @PrePersist
     public void prePersist() {
         if (cost == null) {
@@ -104,12 +110,20 @@ public class ShopUnit {
         this.children = children;
     }
 
+    /**
+     * deletes child with decresing cost and offersCount
+     * @param unit child to delete
+     */
     public void deleteChild(ShopUnit unit) {
         children.remove(unit);
         cost -= unit.getCost();
         offersCount -= unit.offersCount;
     }
 
+    /**
+     * adds child with increasin cost and offersCount
+     * @param unit child to add
+     */
     public void addChild(ShopUnit unit) {
         children.add(unit);
         if (cost == null) {
@@ -122,6 +136,9 @@ public class ShopUnit {
     @ManyToMany
     private Set<ShopUnit> children;
 
+    /**
+     * increases or decreases cost and countOffers without adding or deleting children.
+     */
     public void updateCostAndCount(long costToAdd, int countToAdd) {
         if (cost == null) {
             cost = 0L;
@@ -201,6 +218,9 @@ public class ShopUnit {
         return offersCount;
     }
 
+    /**
+     * gets offer cost in average
+     */
     public Long getPrice() {
         if (offersCount == 0) {
             return null;

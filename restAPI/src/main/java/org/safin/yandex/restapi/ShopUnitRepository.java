@@ -7,6 +7,10 @@ import java.util.*;
 
 @Repository
 public interface ShopUnitRepository extends JpaRepository<ShopUnit, String> {
+    /**
+     * deleting this unit with all its children recursively
+     * @param unit root unit
+     */
     default void deleteUnitWithChildren(ShopUnit unit) {
         List<ShopUnit> toDelete = deleteUnitWithChildrenInjected(unit);
         if (unit.getParentId() != null) {
@@ -36,6 +40,10 @@ public interface ShopUnitRepository extends JpaRepository<ShopUnit, String> {
         return toDelete;
     }
 
+    /**
+     * adding this unit with its children recursively
+     * @param unit root unit
+     */
     default void addUnitWithChildren(ShopUnit unit) {
         if (unit.getChildren() != null) {
             for (ShopUnit child : unit.getChildren()) {
